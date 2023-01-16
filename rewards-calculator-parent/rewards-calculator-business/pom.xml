@@ -6,4 +6,13 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>rewards-calculator-business</artifactId>
+  <packaging>jar</packaging>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.poc.rewards</groupId>
+		<artifactId>rewards-calculator-dataaccess</artifactId>
+		<version>${project.version}</version>
+  	</dependency>
+  	
+  </dependencies>
 </project>

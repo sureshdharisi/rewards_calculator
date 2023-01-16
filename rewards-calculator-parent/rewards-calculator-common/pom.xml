@@ -5,13 +5,12 @@
     <artifactId>rewards-calculator-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>rewards-calculator-dataaccess</artifactId>
+  <artifactId>rewards-calculator-common</artifactId>
   <packaging>jar</packaging>
   <dependencies>
-  	
   	<dependency>
   		<groupId>com.poc.rewards</groupId>
-		<artifactId>rewards-calculator-common</artifactId>
+		<artifactId>rewards-calculator-model</artifactId>
 		<version>${project.version}</version>
   	</dependency>
   </dependencies>
