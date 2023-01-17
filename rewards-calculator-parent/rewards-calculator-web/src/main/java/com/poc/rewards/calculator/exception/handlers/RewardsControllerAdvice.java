@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.coding.reward.calculator.response.ExceptionResponse;
+import com.poc.rewards.calculator.common.exception.InvalidDataException;
+import com.poc.rewards.calculator.model.response.ExceptionResponse;
 
 @ControllerAdvice
 public class RewardsControllerAdvice {

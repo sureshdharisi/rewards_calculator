@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coding.reward.calculator.exception.InvalidDataException;
-import com.coding.reward.calculator.response.RewardsResponse;
-import com.coding.reward.calculator.service.RewardsCalculatorService;
+import com.poc.rewards.calculator.business.service.RewardsCalculatorService;
+import com.poc.rewards.calculator.common.exception.InvalidDataException;
+import com.poc.rewards.calculator.model.response.RewardsResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,8 +27,8 @@ public class RewardsCalculatorController {
 	 * Example:
 	 * 
 	 * <br/>
-	 * http://localhost:8585/rewards/calculate/120.0 -> {"points": 90} <br/>
-	 * http://localhost:8080/rewards/calculate/100.0 -> {"points": 50} <br/>
+	 * http://localhost:8686/rewards/calculate/120.0 -> {"points": 90} <br/>
+	 * http://localhost:8686/rewards/calculate/100.0 -> {"points": 50} <br/>
 	 * </p>
 	 * 
 	 * 

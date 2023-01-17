@@ -16,8 +16,14 @@
 	<description>This will calculate the rewards point based on purchase amount</description>
 	<properties>
 		<java.version>17</java.version>
+		<dozer.version>5.5.1</dozer.version>
 	</properties>
 	<dependencies>
+		<dependency>
+    		<groupId>net.sf.dozer</groupId>
+    		<artifactId>dozer</artifactId>
+    		<version>${dozer.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -119,10 +125,6 @@
 	</build>
 
 	<modules>
-		<module>rewards-calculator-model</module>
-		<module>rewards-calculator-common</module>
-		<module>rewards-calculator-dataaccess</module>
-		<module>rewards-calculator-business</module>
 		<module>rewards-calculator-web</module>
 	</modules>
 </project>

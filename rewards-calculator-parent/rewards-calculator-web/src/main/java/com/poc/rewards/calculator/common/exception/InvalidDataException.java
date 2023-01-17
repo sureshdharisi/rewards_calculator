@@ -1,4 +1,4 @@
-package com.poc.rewards.calculator.exception;
+package com.poc.rewards.calculator.common.exception;
 
 public class InvalidDataException extends RuntimeException{
 
