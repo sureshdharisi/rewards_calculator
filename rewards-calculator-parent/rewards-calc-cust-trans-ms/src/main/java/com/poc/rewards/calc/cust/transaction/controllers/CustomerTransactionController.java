@@ -27,7 +27,7 @@ public class CustomerTransactionController {
 	private CustomerTransactionService customerTransactionService;
 	
 	@PostMapping
-	public CustomerTransactionResponse createConfig(@Valid @RequestBody CustomerTransactionRequest request) {
+	public CustomerTransactionResponse createPaymentTransaction(@Valid @RequestBody CustomerTransactionRequest request) {
 		this.customerTransactionService.createCustomerTransaction(request);
 		CustomerTransactionResponse response=new CustomerTransactionResponse();
 		response.setTransactionId(request.getId());
@@ -35,17 +35,22 @@ public class CustomerTransactionController {
 	}
 	
 	@GetMapping("/all")
-	public List<CustomerTransactionRequest> fetchAllConfigDetails(){
+	public List<CustomerTransactionRequest> fetchAllTransactionDetails(){
 		return this.customerTransactionService.getAllCustomerTransactions();
 	}
 	
 	@GetMapping("/{id}")
-	public CustomerTransactionRequest fetchAllConfigDetailsById(@PathVariable @Valid Integer id){
+	public CustomerTransactionRequest fetchTransactionDetailsById(@PathVariable @Valid Integer id){
 		return this.customerTransactionService.getCustomerTransaction(id);
 	}
 	
+	@GetMapping("/custid/{customerId}")
+	public List<CustomerTransactionRequest> fetchTransactionDetailsByCustomerId(@PathVariable @Valid String customerId){
+		return this.customerTransactionService.getAllCustomerTransactions(customerId);
+	}
+	
 	@DeleteMapping("/{id}")
-	public CustomerTransactionResponse deleteConfig(@PathVariable @Valid Integer id) {
+	public CustomerTransactionResponse deleteCustomerTransaction(@PathVariable @Valid Integer id) {
 		this.customerTransactionService.deleteCustomerTransaction(id);
 		CustomerTransactionResponse response=new CustomerTransactionResponse();
 		response.setMessage("The transaction "+id+" is deleted successfully");

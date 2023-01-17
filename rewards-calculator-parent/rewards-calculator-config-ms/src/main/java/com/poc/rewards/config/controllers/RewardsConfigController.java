@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.poc.rewards.config.business.service.ConfigurationService;
 import com.poc.rewards.config.model.request.RewardsLimitsRequest;
+import com.poc.rewards.config.model.response.ConfigResponse;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/config")
-@RequiredArgsConstructor
+@RequestMapping("/")
 public class RewardsConfigController {
 	
 	@Autowired
@@ -48,10 +47,12 @@ public class RewardsConfigController {
 		return request;
 	}
 	
-	@DeleteMapping
-	public RewardsLimitsRequest deleteConfig(@Valid @RequestBody RewardsLimitsRequest request) {
-		this.rewardsLimitConfigService.deleteConfig(request);
-		return request;
+	@DeleteMapping("/{id}")
+	public ConfigResponse deleteConfig(@PathVariable @Valid Integer id) {
+		this.rewardsLimitConfigService.deleteConfig(id);
+		ConfigResponse response=new ConfigResponse();
+		response.setMessage("The configuration "+id+" is deleted successfully");
+		return response;
 	}
 	
 	

@@ -44,11 +44,9 @@ public class ConfigurationService {
 
 	}
 
-	public RewardsLimitsRequest deleteConfig(RewardsLimitsRequest request) {
-		RewardsLimitsEntity entity = this.rewardsLimitsRepository.findById(request.getId()).get();
+	public void deleteConfig(Integer id) {
+		RewardsLimitsEntity entity = this.rewardsLimitsRepository.findById(id).get();
 		this.rewardsLimitsRepository.delete(entity);
-		return request;
-
 	}
 
 	public List<RewardsLimitsRequest> getAllLimitConfigDetails() {

@@ -48,6 +48,16 @@ public class CustomerTransactionService {
 			return request;
 		}).collect(Collectors.toList());
 	}
+	
+	public List<CustomerTransactionRequest> getAllCustomerTransactions(String customerId) {
+		List<CustomerTransactionEntity> entityList = this.customerTransactionsRepository.findByCustomerId(customerId);
+		return entityList.stream().map(entity -> {
+			CustomerTransactionRequest request = this.mapper.map(entity, CustomerTransactionRequest.class);
+			request.setTransactionDate(entity.getTransactionDateTime().toLocalDateTime().toLocalDate());
+			return request;
+		}).collect(Collectors.toList());
+	}
+
 
 	public CustomerTransactionRequest getCustomerTransaction(Integer id) {
 		CustomerTransactionEntity entity = this.customerTransactionsRepository.findById(id).get();

@@ -10,6 +10,7 @@ import com.poc.rewards.calculator.business.service.RewardsCalculatorService;
 import com.poc.rewards.calculator.common.exception.InvalidDataException;
 import com.poc.rewards.calculator.model.response.RewardsResponse;
 
+import io.micrometer.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -37,13 +38,13 @@ public class RewardsCalculatorController {
 	 * @param purchaseAmount
 	 * @return
 	 */
-	@GetMapping(path = "{purchaseAmount}")
-	public RewardsResponse calculateRewards(@PathVariable(required = true) Double purchaseAmount) {
-		log.debug("Purchase amount = {}", purchaseAmount);
-		if (purchaseAmount == null) {
-			throw new InvalidDataException("RC001", "Purchase amount is required");
+	@GetMapping(path = "{customerId}")
+	public RewardsResponse calculateRewards(@PathVariable String customerId) {
+		log.debug("Customer ID = {}", customerId);
+		if (StringUtils.isBlank(customerId)) {
+			throw new InvalidDataException("RC001", "Customer ID is required");
 		}
-		Integer points = service.calculatePoints(purchaseAmount);
+		Integer points = service.calculatePoints(customerId);
 
 		RewardsResponse response = new RewardsResponse(points);
 
