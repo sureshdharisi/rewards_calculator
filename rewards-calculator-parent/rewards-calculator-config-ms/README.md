@@ -85,9 +85,13 @@ PRIMARY KEY (ID));
 
 ### Base URL: http:localhost:8585/rewards/config/
 
-||Scenario||URL || Request Method || Payload || Response ||
+|Scenario|URL | Request Method | Payload | Response |
 |---------|-----|-----------------|----------|-----------|
-| Create Config | / | POST | ```json { "lowerLimit":50,"upperLimit":100,"points":1} ``` | ```json {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
+| Create config | / | POST | ``` { "lowerLimit":50,"upperLimit":100,"points":1} ``` | ``` {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
+| Get all configs | /all | GET | -NA- | ``` {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
+| Get config by Id | /{id} | GET | 1 or 2 or 3 | ``` {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
+| Update config | / | PUT | ``` { "lowerLimit":50,"upperLimit":100,"points":1} ``` | ``` {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
+| Delete config | /{id} | DELETE | 1 or 2 or 3 | ``` {"message": "The configuration 1 is deleted successfully"} ```|
 
 ### Create rewards config
 #### URL:
