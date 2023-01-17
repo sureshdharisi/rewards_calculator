@@ -93,5 +93,40 @@ PRIMARY KEY (ID));
 | Update config | / | PUT | ``` { "lowerLimit":50,"upperLimit":100,"points":1} ``` | ``` {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
 | Delete config | /{id} | DELETE | 1 or 2 or 3 | ``` {"message": "The configuration 1 is deleted successfully"} ```|
 
-### Create rewards config
-#### URL:
+
+### How to run?
+1. Download the code from github using below url
+
+    ```
+    git clone https://github.com/sureshdharisi/rewards_calculator.git
+    ```
+2. Goto the project where pom.xml is located 
+
+    ```
+    cd rewards_calculator/rewards-calculator-parent/rewards-calculator-config-ms
+    ```
+3. Run the maven command. The below command will run the junit test cases automatically
+
+    ```
+    mvn clean install
+    ```
+4. Run the application using spring boot plugin.
+
+    ```
+    mvn spring-boot:run
+    ```
+### Management URL
+
+```
+http://localhost:8585/rewards/config/manage
+```
+### Generate spotbug report
+1. Run below command to generate spot bug report
+
+```
+mvn site
+```
+Now report will be generated in the target folder and the location is "rewards-calculator-config-ms\target\site\spotbugs.html"
+
+## Spotbugs report
+![alt text](https://github.com/sureshdharisi/codechallenge/blob/master/reward-calculator/Spotbugs_report.PNG?raw=true)
