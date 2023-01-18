@@ -1,0 +1,20 @@
+[
+    {
+        "id": 10,
+        "customerId": "XYZ",
+        "transactionAmt": 100,
+        "transactionDate": "2022-12-19"
+    },
+    {
+        "id": 11,
+        "customerId": "XYZ",
+        "transactionAmt": 105,
+        "transactionDate": "2022-10-19"
+    },
+    {
+        "id": 12,
+        "customerId": "XYZ",
+        "transactionAmt": 115,
+        "transactionDate": "2022-09-19"
+    }
+]

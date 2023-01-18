@@ -27,7 +27,7 @@ If you are using java.version 11, then make sure java_home also should point to 
 - STS 4.x for development
 
 ## Coverage Details
-![alt text](https://github.com/sureshdharisi/codechallenge/blob/master/reward-calculator/CodeCoverage_Details.PNG?raw=true)
+![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/rewards-calculator-web/coverage.PNG?raw=true)
 
 ## Testing
 

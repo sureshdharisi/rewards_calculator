@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "lowerLimit": 100,
+        "upperLimit": null,
+        "points": 2
+    },
+    {
+        "id": 3,
+        "lowerLimit": 50,
+        "upperLimit": 100,
+        "points": 1
+    }
+]
