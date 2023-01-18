@@ -34,7 +34,6 @@ If you are using java.version 11, then make sure java_home also should point to 
 - Maven for build
 - Jacoco for coverage
 - STS 4.x for development
-- Spotbugs plugin
 
 
 ## H2 configuration details:

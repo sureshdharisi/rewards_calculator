@@ -186,6 +186,11 @@
 			    		<exclude>com/poc/rewards/calc/cust/transaction/model/request/*.*</exclude>
 			    		<exclude>com/poc/rewards/calc/cust/transaction/model/response/*.*</exclude>
 			    		<exclude>com/poc/rewards/calc/cust/transaction/RewardsCalcCustomerTransactionsApplication.class</exclude>
+			    		
+			    		<exclude>com/poc/rewards/config/dataaccess/entity/*.*</exclude>
+			    		<exclude>com/poc/rewards/config/model/request/*.*</exclude>
+			    		<exclude>com/poc/rewards/config/model/response/*.*</exclude>
+			    		<exclude>com/poc/rewards/config/RewardsConfigApplication.class</exclude>
 			    	</excludes>
 			    </configuration>
 			    <executions>

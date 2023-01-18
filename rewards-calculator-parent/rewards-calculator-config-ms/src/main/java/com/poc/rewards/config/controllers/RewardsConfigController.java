@@ -36,10 +36,6 @@ public class RewardsConfigController {
 		return this.rewardsLimitConfigService.getAllLimitConfigDetails();
 	}
 	
-	@GetMapping("/{id}")
-	public RewardsLimitsRequest fetchAllConfigDetailsById(@PathVariable @Valid Integer id){
-		return this.rewardsLimitConfigService.getLimitConfigDetails(id);
-	}
 	
 	@PutMapping
 	public RewardsLimitsRequest updateConfig(@Valid @RequestBody RewardsLimitsRequest request) {

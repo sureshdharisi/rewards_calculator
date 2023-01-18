@@ -3,12 +3,14 @@ package com.poc.rewards.config.business.service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.poc.rewards.config.common.exception.InvalidDataException;
 import com.poc.rewards.config.dataaccess.entity.RewardsLimitsEntity;
 import com.poc.rewards.config.dataaccess.repository.RewardsConfigRepository;
 import com.poc.rewards.config.model.request.RewardsLimitsRequest;
@@ -45,8 +47,13 @@ public class ConfigurationService {
 	}
 
 	public void deleteConfig(Integer id) {
-		RewardsLimitsEntity entity = this.rewardsLimitsRepository.findById(id).get();
-		this.rewardsLimitsRepository.delete(entity);
+		Optional<RewardsLimitsEntity> entity = this.rewardsLimitsRepository.findById(id);
+		if(entity.isPresent()) {
+			this.rewardsLimitsRepository.delete(entity.get());
+		}else {
+			throw new InvalidDataException("CFG100", "Config record is not found");
+		}
+		
 	}
 
 	public List<RewardsLimitsRequest> getAllLimitConfigDetails() {
@@ -55,9 +62,4 @@ public class ConfigurationService {
 				.collect(Collectors.toList());
 	}
 
-	public RewardsLimitsRequest getLimitConfigDetails(Integer id) {
-		RewardsLimitsEntity entity = this.rewardsLimitsRepository.findById(id).get();
-		return this.mapper.map(entity, RewardsLimitsRequest.class);
-
-	}
 }

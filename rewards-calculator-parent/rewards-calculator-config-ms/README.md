@@ -19,7 +19,6 @@ URL: http://localhost:8585/rewards/config/
 
 - Create config (POST)
 - Get all configs (GET - /all)
-- Get config by id (GET -/{id})
 - Update config (PUT)
 - Delete config (DELETE)
 
@@ -36,8 +35,6 @@ If you are using java.version 11, then make sure java_home also should point to 
 - Maven for build
 - Jacoco for coverage
 - STS 4.x for development
-- Spotbugs plugin
-
 
 
 ## H2 configuration details:
@@ -89,9 +86,13 @@ PRIMARY KEY (ID));
 |---------|-----|-----------------|----------|-----------|
 | Create config | / | POST | ``` { "lowerLimit":50,"upperLimit":100,"points":1} ``` | ``` {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
 | Get all configs | /all | GET | -NA- | ``` {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
-| Get config by Id | /{id} | GET | 1 or 2 or 3 | ``` {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
 | Update config | / | PUT | ``` { "lowerLimit":50,"upperLimit":100,"points":1} ``` | ``` {"id": 3,"lowerLimit": 50,"upperLimit": 100,"points": 1} ```|
 | Delete config | /{id} | DELETE | 1 or 2 or 3 | ``` {"message": "The configuration 1 is deleted successfully"} ```|
+
+
+## Junit test cases details
+![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/rewards-calculator-config-ms/coverage.PNG?raw=true)
+
 
 
 ### How to run?
@@ -120,13 +121,3 @@ PRIMARY KEY (ID));
 ```
 http://localhost:8585/rewards/config/manage
 ```
-### Generate spotbug report
-1. Run below command to generate spot bug report
-
-```
-mvn site
-```
-Now report will be generated in the target folder and the location is "rewards-calculator-config-ms\target\site\spotbugs.html"
-
-## Spotbugs report
-![alt text](https://github.com/sureshdharisi/codechallenge/blob/master/reward-calculator/Spotbugs_report.PNG?raw=true)
