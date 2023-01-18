@@ -121,7 +121,7 @@ http://localhost:8686/customer/transaction/manage
 ```
 mvn site
 ```
-Now report will be generated in the target folder and the location is "rewards-calculator-config-ms\target\site\spotbugs.html"
+Now report will be generated in the target folder and the location is "rewards-calc-cust-trans-ms\target\site\spotbugs.html"
 
 ## Spotbugs report
 ![alt text](https://github.com/sureshdharisi/codechallenge/blob/master/reward-calculator/Spotbugs_report.PNG?raw=true)
