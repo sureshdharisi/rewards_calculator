@@ -27,8 +27,10 @@
 		<swagger.version>3.0.0</swagger.version>
 		<mock.version>4.11.0</mock.version>
 		<jacoco.plugin.version>0.8.8</jacoco.plugin.version>
+		<wiremock.version>2.27.2</wiremock.version>
 	</properties>
 	<dependencies>
+		
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
@@ -191,6 +193,12 @@
 			    		<exclude>com/poc/rewards/config/model/request/*.*</exclude>
 			    		<exclude>com/poc/rewards/config/model/response/*.*</exclude>
 			    		<exclude>com/poc/rewards/config/RewardsConfigApplication.class</exclude>
+			    		
+			    		<exclude>com/poc/rewards/calculator/common/exception/*.*</exclude>
+			    		<exclude>com/poc/rewards/calculator/model/request/*.*</exclude>
+			    		<exclude>com/poc/rewards/calculator/model/response/*.*</exclude>
+			    		<exclude>com/poc/rewards/calculator/RewardsCalculatorApplication.class</exclude>
+			    		
 			    	</excludes>
 			    </configuration>
 			    <executions>

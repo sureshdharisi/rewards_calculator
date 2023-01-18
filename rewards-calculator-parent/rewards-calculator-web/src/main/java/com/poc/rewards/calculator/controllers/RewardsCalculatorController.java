@@ -22,20 +22,19 @@ public class RewardsCalculatorController {
 	private RewardsCalculatorService service;
 
 	/**
-	 * This will calculate the rewards points based on purchase amount
+	 * This will calculate the rewards points based on purchase amount by the customer
 	 * 
 	 * <p>
 	 * Example:
 	 * 
 	 * <br/>
-	 * http://localhost:8686/rewards/calculate/120.0 -> {"points": 90} <br/>
-	 * http://localhost:8686/rewards/calculate/100.0 -> {"points": 50} <br/>
+	 * http://localhost:8686/rewards/calculate/ABC -> {"points": 250} <br/>
 	 * </p>
 	 * 
 	 * 
 	 * Made request params are optional to verify the error scenarios.
 	 * 
-	 * @param purchaseAmount
+	 * @param customer id
 	 * @return
 	 */
 	@GetMapping(path = "{customerId}")

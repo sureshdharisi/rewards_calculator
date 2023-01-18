@@ -27,6 +27,11 @@ public class CustomerTransactionService {
 	@Autowired
 	private Mapper mapper;
 
+	/**
+	 * This will create the customer transaction
+	 * @param request
+	 * @return
+	 */
 	public CustomerTransactionRequest createCustomerTransaction(CustomerTransactionRequest request) {
 		CustomerTransactionEntity entity = this.mapper.map(request, CustomerTransactionEntity.class);
 		entity.setTransactionDateTime(Timestamp.valueOf(request.getTransactionDate().atStartOfDay()));
@@ -37,6 +42,10 @@ public class CustomerTransactionService {
 
 	}
 
+	/**
+	 * This will delete the customer transaction and throws the exception if transaction not found.
+	 * @param id
+	 */
 	public void deleteCustomerTransaction(Integer id) {
 		Optional<CustomerTransactionEntity> entity = this.customerTransactionsRepository.findById(id);
 		if(entity.isPresent()) {
@@ -46,6 +55,12 @@ public class CustomerTransactionService {
 		}
 		
 	}
+	
+	/**
+	 * This will return all the customer transactions for given customer.
+	 * @param customerId
+	 * @return
+	 */
 
 	public List<CustomerTransactionRequest> getAllCustomerTransactions(String customerId) {
 		List<CustomerTransactionEntity> entityList = this.customerTransactionsRepository.findByCustomerId(customerId);
