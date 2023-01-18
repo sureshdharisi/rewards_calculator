@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.0.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.poc.rewards</groupId>
 	<artifactId>rewards-calculator-parent</artifactId>
@@ -17,12 +18,21 @@
 	<properties>
 		<java.version>17</java.version>
 		<dozer.version>5.5.1</dozer.version>
+		<spring-cloud.version>2022.0.0</spring-cloud.version>
+		<okhttp.version>4.9.1</okhttp.version>
+		<spotbug.version>4.7.3.0</spotbug.version>
+		<maven.site.plugin.version>3.9.1</maven.site.plugin.version>
+		<maven.project.info.reports.plugin.version>3.1.1</maven.project.info.reports.plugin.version>
+		<commons-io.version>2.8.0</commons-io.version>
+		<swagger.version>3.0.0</swagger.version>
+		<mock.version>4.11.0</mock.version>
+		<jacoco.plugin.version>0.8.8</jacoco.plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
-    		<groupId>net.sf.dozer</groupId>
-    		<artifactId>dozer</artifactId>
-    		<version>${dozer.version}</version>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>${dozer.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -48,7 +58,21 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-rest-hal-explorer</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-okhttp</artifactId>
+			<version>12.1</version>
+		</dependency>
 
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-httpclient</artifactId>
+			<version>12.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -82,6 +106,17 @@
 		</dependency>
 	</dependencies>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -121,10 +156,64 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>${maven.site.plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${maven.project.info.reports.plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>${spotbug.version}</version>
+				<configuration>
+					<xmlOutput>true</xmlOutput>
+					<!-- Optional directory to put spotbugs xdoc xml report -->
+					<xmlOutputDirectory>target/site</xmlOutputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+			    <groupId>org.jacoco</groupId>
+			    <artifactId>jacoco-maven-plugin</artifactId>
+			    <version>${jacoco.plugin.version}</version>
+			    <configuration>
+			    	<excludes>
+			    		<exclude>com/poc/rewards/calc/cust/transaction/dataaccess/entity/*.*</exclude>
+			    		<exclude>com/poc/rewards/calc/cust/transaction/model/request/*.*</exclude>
+			    		<exclude>com/poc/rewards/calc/cust/transaction/model/response/*.*</exclude>
+			    		<exclude>com/poc/rewards/calc/cust/transaction/RewardsCalcCustomerTransactionsApplication.class</exclude>
+			    		
+			    		<exclude>com/poc/rewards/config/dataaccess/entity/*.*</exclude>
+			    		<exclude>com/poc/rewards/config/model/request/*.*</exclude>
+			    		<exclude>com/poc/rewards/config/model/response/*.*</exclude>
+			    		<exclude>com/poc/rewards/config/RewardsConfigApplication.class</exclude>
+			    	</excludes>
+			    </configuration>
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>prepare-agent</goal>
+			            </goals>
+			        </execution>
+			        <execution>
+			            <id>report</id>
+			            <phase>prepare-package</phase>
+			            <goals>
+			                <goal>report</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>
 		</plugins>
 	</build>
 
 	<modules>
+		<module>rewards-calculator-config-ms</module>
+		<module>rewards-calc-cust-trans-ms</module>
 		<module>rewards-calculator-web</module>
 	</modules>
 </project>

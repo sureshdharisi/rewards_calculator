@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.poc.rewards.calculator.model.request.CustomerTransactionRequest;
 import com.poc.rewards.calculator.model.request.RewardsLimitsRequest;
 
 import lombok.RequiredArgsConstructor;
@@ -16,11 +17,21 @@ import lombok.RequiredArgsConstructor;
 public class RewardsCalculatorService {
 
 	@Autowired
-	private RewardsLimitConfigService rewardsLimitConfigService;
+	private RewardsLimitConfigClient rewardsLimitConfigClient;
+	
+	@Autowired
+	private CustomerTransactionsClient customerTransactionsClient;
 
-	public Integer calculatePoints(Double purchaseAmount) {
+	public Integer calculatePoints(String customerId) {
 
-		List<RewardsLimitsRequest> rewardsLimitsList = this.rewardsLimitConfigService.getAllLimitConfigDetails();
+		List<CustomerTransactionRequest> customerTransactionsList=this.customerTransactionsClient.getAllCustomerTransactions(customerId);
+		List<RewardsLimitsRequest> rewardsLimitsList = this.rewardsLimitConfigClient.getAllLimitConfigDetails();
+		
+		AtomicInteger purchaseAmountValue=new AtomicInteger(0);
+		
+		customerTransactionsList.stream().forEach(request->{
+			purchaseAmountValue.addAndGet(request.getTransactionAmt());
+		});
 
 		Collections.sort(rewardsLimitsList,
 				(reward1, reward2) -> -1 * reward1.getLowerLimit().compareTo(reward2.getLowerLimit()));
@@ -28,16 +39,16 @@ public class RewardsCalculatorService {
 		AtomicInteger points = new AtomicInteger(0);
 
 		rewardsLimitsList.forEach(limit -> {
-			if (purchaseAmount > limit.getLowerLimit()) {
+			if (purchaseAmountValue.get() > limit.getLowerLimit()) {
 				if (limit.getUpperLimit() != null) {
-					if (limit.getUpperLimit() > purchaseAmount.intValue()) {
-						points.addAndGet(limit.getPoints() * (purchaseAmount.intValue() - limit.getLowerLimit()));
+					if (limit.getUpperLimit() > purchaseAmountValue.get()) {
+						points.addAndGet(limit.getPoints() * (purchaseAmountValue.get() - limit.getLowerLimit()));
 					} else {
 						points.addAndGet(limit.getPoints() * (limit.getUpperLimit() - limit.getLowerLimit()));
 					}
 
 				} else {
-					points.addAndGet(limit.getPoints() * (purchaseAmount.intValue() - limit.getLowerLimit()));
+					points.addAndGet(limit.getPoints() * (purchaseAmountValue.get() - limit.getLowerLimit()));
 				}
 			}
 
