@@ -34,16 +34,6 @@ public class CustomerTransactionController {
 		return response;
 	}
 	
-	@GetMapping("/all")
-	public List<CustomerTransactionRequest> fetchAllTransactionDetails(){
-		return this.customerTransactionService.getAllCustomerTransactions();
-	}
-	
-	@GetMapping("/{id}")
-	public CustomerTransactionRequest fetchTransactionDetailsById(@PathVariable @Valid Integer id){
-		return this.customerTransactionService.getCustomerTransaction(id);
-	}
-	
 	@GetMapping("/custid/{customerId}")
 	public List<CustomerTransactionRequest> fetchTransactionDetailsByCustomerId(@PathVariable @Valid String customerId){
 		return this.customerTransactionService.getAllCustomerTransactions(customerId);

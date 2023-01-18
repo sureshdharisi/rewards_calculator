@@ -18,8 +18,6 @@ This micro service will support below services
 URL: http://localhost:8686/customer/transaction/
 
 - Create transaction (POST)
-- Get all transactions (GET - /all)
-- Get all transactions by id (GET -/{id})
 - Get all transactions by customer id (GET -/custid/{customerId})
 - Delete transactions by id (DELETE - /{id})
 
@@ -83,10 +81,12 @@ PRIMARY KEY (ID));
 |Scenario|URL | Request Method | Payload | Response |
 |---------|-----|-----------------|----------|-----------|
 | Create customer transaction | / | POST | ``` {"customerId":"ABC","transactionAmt":100,"transactionDate":"2022-12-09"} ``` | ``` {"transactionId":8} ```|
-| Get all transactions | /all | GET | -NA- | ``` [{"id":7,"customerId":"ABC","transactionAmt":100,"transactionDate":"2022-11-09"}] ```|
-| Get transactions by Id | /{id} | GET | 7 | ``` {"id":7,"customerId":"ABC","transactionAmt":100,"transactionDate":"2022-11-09"} ```|
 | Get transactions by customer Id | /custid/{customerId} | GET | ABC | ``` [{"id":7,"customerId":"ABC","transactionAmt":100,"transactionDate":"2022-11-09"},{"id":8,"customerId":"ABC","transactionAmt":100,"transactionDate":"2022-12-09"}] ```|
 | Delete transaction by id | /{id} | DELETE | 1 or 2 or 3 | ``` {"message": "The configuration 1 is deleted successfully"} ```|
+
+
+## Junit test cases details
+![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/rewards-calc-cust-trans-ms/code_coverage.PNG?raw=true)
 
 
 ### How to run?
@@ -115,13 +115,3 @@ PRIMARY KEY (ID));
 ```
 http://localhost:8686/customer/transaction/manage
 ```
-### Generate spotbug report
-1. Run below command to generate spot bug report
-
-```
-mvn site
-```
-Now report will be generated in the target folder and the location is "rewards-calc-cust-trans-ms\target\site\spotbugs.html"
-
-## Spotbugs report
-![alt text](https://github.com/sureshdharisi/codechallenge/blob/master/reward-calculator/Spotbugs_report.PNG?raw=true)

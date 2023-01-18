@@ -3,12 +3,14 @@ package com.poc.rewards.calc.cust.transaction.business.service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.poc.rewards.calc.cust.transaction.common.exception.InvalidDataException;
 import com.poc.rewards.calc.cust.transaction.dataaccess.entity.CustomerTransactionEntity;
 import com.poc.rewards.calc.cust.transaction.dataaccess.repository.CustomerTransactionsRepository;
 import com.poc.rewards.calc.cust.transaction.model.request.CustomerTransactionRequest;
@@ -36,19 +38,15 @@ public class CustomerTransactionService {
 	}
 
 	public void deleteCustomerTransaction(Integer id) {
-		CustomerTransactionEntity entity = this.customerTransactionsRepository.findById(id).get();
-		this.customerTransactionsRepository.delete(entity);
+		Optional<CustomerTransactionEntity> entity = this.customerTransactionsRepository.findById(id);
+		if(entity.isPresent()) {
+			this.customerTransactionsRepository.delete(entity.get());
+		}else {
+			throw new InvalidDataException("CT100", "Transaction record is not found");
+		}
+		
 	}
 
-	public List<CustomerTransactionRequest> getAllCustomerTransactions() {
-		List<CustomerTransactionEntity> entityList = this.customerTransactionsRepository.findAll();
-		return entityList.stream().map(entity -> {
-			CustomerTransactionRequest request = this.mapper.map(entity, CustomerTransactionRequest.class);
-			request.setTransactionDate(entity.getTransactionDateTime().toLocalDateTime().toLocalDate());
-			return request;
-		}).collect(Collectors.toList());
-	}
-	
 	public List<CustomerTransactionRequest> getAllCustomerTransactions(String customerId) {
 		List<CustomerTransactionEntity> entityList = this.customerTransactionsRepository.findByCustomerId(customerId);
 		return entityList.stream().map(entity -> {
@@ -59,9 +57,4 @@ public class CustomerTransactionService {
 	}
 
 
-	public CustomerTransactionRequest getCustomerTransaction(Integer id) {
-		CustomerTransactionEntity entity = this.customerTransactionsRepository.findById(id).get();
-		return this.mapper.map(entity, CustomerTransactionRequest.class);
-
-	}
 }
