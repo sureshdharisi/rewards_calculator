@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.poc.rewards.calculator.configurations.ClientConfiguration;
 import com.poc.rewards.calculator.model.request.RewardsLimitsRequest;
 
+/**
+ * This will interact with limits config micro service and gets the configuration details.
+ * @author suresh.dharisi
+ *
+ */
 @Service
 @FeignClient(value = "limitconfigclient", url = "localhost:8585/rewards/config/", configuration = ClientConfiguration.class)
 public interface RewardsLimitConfigClient {

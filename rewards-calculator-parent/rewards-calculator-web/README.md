@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This service will calculated the rewards points based on the purchase amount. This spring boot micro service also includes the below features
+This service will calculated the rewards points based on the purchase amount by customer. This spring boot micro service also includes the below features
 
 - Junit parameterized test cases
 - Code coverage 
@@ -25,14 +25,13 @@ If you are using java.version 11, then make sure java_home also should point to 
 - Maven for build
 - Jacoco for coverage
 - STS 4.x for development
-- Spotbugs plugin
 
 ## Coverage Details
 ![alt text](https://github.com/sureshdharisi/codechallenge/blob/master/reward-calculator/CodeCoverage_Details.PNG?raw=true)
 
 ## Testing
 
-### Predefined data setup
+### Prerequisites to test
 - Use configuration micro service to setup configuration values
 - use customer transactions micro service to setup transactions data
 

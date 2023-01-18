@@ -26,6 +26,11 @@ public class CustomerTransactionController {
 	@Autowired
 	private CustomerTransactionService customerTransactionService;
 	
+	/**
+	 * This will create the transaction record for given customer
+	 * @param request
+	 * @return
+	 */
 	@PostMapping
 	public CustomerTransactionResponse createPaymentTransaction(@Valid @RequestBody CustomerTransactionRequest request) {
 		this.customerTransactionService.createCustomerTransaction(request);
@@ -34,11 +39,21 @@ public class CustomerTransactionController {
 		return response;
 	}
 	
+	/**
+	 * This will return all the customer transactions data.
+	 * @param customerId
+	 * @return
+	 */
 	@GetMapping("/custid/{customerId}")
 	public List<CustomerTransactionRequest> fetchTransactionDetailsByCustomerId(@PathVariable @Valid String customerId){
 		return this.customerTransactionService.getAllCustomerTransactions(customerId);
 	}
 	
+	/**
+	 * This will delete the customer transaction.
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/{id}")
 	public CustomerTransactionResponse deleteCustomerTransaction(@PathVariable @Valid Integer id) {
 		this.customerTransactionService.deleteCustomerTransaction(id);

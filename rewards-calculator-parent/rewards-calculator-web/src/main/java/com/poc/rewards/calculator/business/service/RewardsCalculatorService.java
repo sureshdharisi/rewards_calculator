@@ -18,18 +18,31 @@ public class RewardsCalculatorService {
 
 	@Autowired
 	private RewardsLimitConfigClient rewardsLimitConfigClient;
-	
+
 	@Autowired
 	private CustomerTransactionsClient customerTransactionsClient;
 
+	/**
+	 * This service will fetch the rewards configuration details from rewards config
+	 * micro service. This will give the reward point values based on purchase
+	 * amount.
+	 * 
+	 * It will also fetch all the transactions done by customer. Using these
+	 * transaction, it will calculate total number of rewards points.
+	 * 
+	 * @param customerId
+	 * @return rewardsPoints
+	 */
+
 	public Integer calculatePoints(String customerId) {
 
-		List<CustomerTransactionRequest> customerTransactionsList=this.customerTransactionsClient.getAllCustomerTransactions(customerId);
+		List<CustomerTransactionRequest> customerTransactionsList = this.customerTransactionsClient
+				.getAllCustomerTransactions(customerId);
 		List<RewardsLimitsRequest> rewardsLimitsList = this.rewardsLimitConfigClient.getAllLimitConfigDetails();
-		
-		AtomicInteger purchaseAmountValue=new AtomicInteger(0);
-		
-		customerTransactionsList.stream().forEach(request->{
+
+		AtomicInteger purchaseAmountValue = new AtomicInteger(0);
+
+		customerTransactionsList.stream().forEach(request -> {
 			purchaseAmountValue.addAndGet(request.getTransactionAmt());
 		});
 
@@ -38,20 +51,10 @@ public class RewardsCalculatorService {
 
 		AtomicInteger points = new AtomicInteger(0);
 
-		rewardsLimitsList.forEach(limit -> {
-			if (purchaseAmountValue.get() > limit.getLowerLimit()) {
-				if (limit.getUpperLimit() != null) {
-					if (limit.getUpperLimit() > purchaseAmountValue.get()) {
-						points.addAndGet(limit.getPoints() * (purchaseAmountValue.get() - limit.getLowerLimit()));
-					} else {
-						points.addAndGet(limit.getPoints() * (limit.getUpperLimit() - limit.getLowerLimit()));
-					}
-
-				} else {
-					points.addAndGet(limit.getPoints() * (purchaseAmountValue.get() - limit.getLowerLimit()));
-				}
-			}
-
+		rewardsLimitsList.stream().filter(limit -> purchaseAmountValue.get() > limit.getLowerLimit()).forEach(limit -> {
+			Integer amount=(limit.getUpperLimit()==null||limit.getUpperLimit() > purchaseAmountValue.get())?purchaseAmountValue.get():limit.getUpperLimit();
+			points.addAndGet(limit.getPoints() * (amount - limit.getLowerLimit()));
+			
 		});
 
 		return points.get();

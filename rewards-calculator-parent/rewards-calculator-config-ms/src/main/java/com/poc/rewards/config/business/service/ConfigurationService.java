@@ -27,6 +27,11 @@ public class ConfigurationService {
 	@Autowired
 	private Mapper mapper;
 
+	/**
+	 * This will create the configuration record
+	 * @param request
+	 * @return
+	 */
 	public RewardsLimitsRequest createConfig(RewardsLimitsRequest request) {
 		RewardsLimitsEntity entity = this.mapper.map(request, RewardsLimitsEntity.class);
 		entity.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
@@ -36,6 +41,12 @@ public class ConfigurationService {
 		return request;
 
 	}
+	
+	/**
+	 * This will update the configuration record
+	 * @param request
+	 * @return
+	 */
 
 	public RewardsLimitsRequest updateConfig(RewardsLimitsRequest request) {
 		RewardsLimitsEntity entity = this.rewardsLimitsRepository.findById(request.getId()).get();
@@ -45,6 +56,11 @@ public class ConfigurationService {
 		return request;
 
 	}
+	
+	/**
+	 * This will delete the configuration record. If record is not found, then it will throw the exception
+	 * @param id
+	 */
 
 	public void deleteConfig(Integer id) {
 		Optional<RewardsLimitsEntity> entity = this.rewardsLimitsRepository.findById(id);
@@ -55,6 +71,11 @@ public class ConfigurationService {
 		}
 		
 	}
+	
+	/**
+	 * This will return all the configuration records
+	 * @return
+	 */
 
 	public List<RewardsLimitsRequest> getAllLimitConfigDetails() {
 		List<RewardsLimitsEntity> entityList = this.rewardsLimitsRepository.findAll();

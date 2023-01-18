@@ -25,17 +25,31 @@ public class RewardsConfigController {
 	@Autowired
 	private ConfigurationService rewardsLimitConfigService;
 	
+	/**
+	 * This will accept the request from user and create the configuration record.
+	 * @param request
+	 * @return
+	 */
 	@PostMapping
 	public RewardsLimitsRequest createConfig(@Valid @RequestBody RewardsLimitsRequest request) {
 		this.rewardsLimitConfigService.createConfig(request);
 		return request;
 	}
 	
+	/**
+	 * This will return all the configuration records
+	 * @return
+	 */
 	@GetMapping("/all")
 	public List<RewardsLimitsRequest> fetchAllConfigDetails(){
 		return this.rewardsLimitConfigService.getAllLimitConfigDetails();
 	}
 	
+	/**
+	 * This api will be used to update the existing configuration record
+	 * @param request
+	 * @return
+	 */
 	
 	@PutMapping
 	public RewardsLimitsRequest updateConfig(@Valid @RequestBody RewardsLimitsRequest request) {
@@ -43,6 +57,11 @@ public class RewardsConfigController {
 		return request;
 	}
 	
+	/**
+	 * This will delete the configuration record for given configuration id.
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/{id}")
 	public ConfigResponse deleteConfig(@PathVariable @Valid Integer id) {
 		this.rewardsLimitConfigService.deleteConfig(id);
