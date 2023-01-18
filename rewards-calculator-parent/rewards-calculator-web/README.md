@@ -43,9 +43,6 @@ ABC | 250 |
 
 
 
-## Junit test cases details
-![alt text](https://github.com/sureshdharisi/codechallenge/blob/master/reward-calculator/Junit_Test_cases.PNG?raw=true)
-
 
 ### Some sample requests
 * Input -1 
@@ -98,12 +95,3 @@ mvn spring-boot:run
 ````
 http://localhost:8787/rewards/manage
 ````
-### Generate spotbug report
-1. Run below command to generate spot bug report
-````
-mvn site
-````
-Now report will be generated in the target folder and the location is "rewards-calculator-web\target\site\spotbugs.html"
-
-## Spotbugs report
-![alt text](https://github.com/sureshdharisi/codechallenge/blob/develop/reward-calculator/Spotbugs_report.PNG?raw=true)
