@@ -220,8 +220,8 @@
 	</build>
 
 	<modules>
-		<module>rewards-calculator-config-ms</module>
-		<module>rewards-calc-cust-trans-ms</module>
-		<module>rewards-calculator-web</module>
+		<module>reward-points-store</module>
+		<module>customer-transactions</module>
+		<module>rewards-calculator</module>
 	</modules>
 </project>
