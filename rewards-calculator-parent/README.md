@@ -1,29 +1,46 @@
+# Rewards calculator service
 
-### Drop predefined data structure
-DROP SEQUENCE rewards_config_seq;
-DROP SEQUENCE cust_transaction_seq;
-DROP TABLE REWARDS_CONFIG;
-DROP TABLE CUST_TRANSACTIONS;
+It will provide the service to calculate the reward points. We divided this application as 3 micro services as a part of implementation.
 
-### Create sequence using below query
-CREATE SEQUENCE rewards_config_seq START WITH 1 INCREMENT BY 1;
-CREATE SEQUENCE cust_transaction_seq START WITH 1 INCREMENT BY 1;
+The available micro services are:
 
-### Create table
+1. Rewards config store
+2. Customer transactions service
+3. Rewards calculator service
 
-CREATE TABLE REWARDS_CONFIG
-(ID INTEGER NOT NULL,
-LOWER_LIMIT INTEGER NOT NULL,
-UPPER_LIMIT INTEGER ,
-POINTS INTEGER NOT NULL,
-CREAE_DT DATE,
-UPDATE_DT DATE,
-PRIMARY KEY (ID));
+This application will provide the capabilities of creating and updating the configurations dynamically so that we can change the reward points configuration any time
+without restarting the server.
 
+## Major components and features used
 
-CREATE TABLE CUST_TRANSACTIONS
-(ID INTEGER NOT NULL,
-CUSTMER_ID INTEGER NOT NULL,
-TRANSACTION_AMT INTEGER ,
-CREAE_DT DATE,
-PRIMARY KEY (ID));
+1. Spring boot
+2. H2 database to store database
+3. In memory cache
+4. Feign clients
+5. Discovery service
+6. Junits
+7. Actuators
+
+## High level flow diagram
+![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/record_calculator_design-High_Level_Diagram.png?raw=true)
+
+## Component diagram
+![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/record_calculator_design-Architecture_Diagram.png?raw=true)
+
+## How to use this application?
+We need to setup the data before sending request for rewards calculation.
+It has individual micro services for configuration, transactions and calculations. 
+
+Use below services to setup data:
+
+### reward-points-store
+
+This micro service will be used to create reqard points configuration data.
+
+### customer-transactions
+
+This micro service will handle the customer transactions. Create few customer transactions to calculate the total rewards.
+
+### rewards-calculator
+
+This micro service will handle the request to calculare the total rewards.

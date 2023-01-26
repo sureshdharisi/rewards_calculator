@@ -5,7 +5,7 @@
     <artifactId>rewards-calculator-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>rewards-calculator-config-ms</artifactId>
+  <artifactId>customer-transactions</artifactId>
   <packaging>jar</packaging>
   
 </project>
