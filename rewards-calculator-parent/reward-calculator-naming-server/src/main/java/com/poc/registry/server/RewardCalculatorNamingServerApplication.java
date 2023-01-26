@@ -1,15 +1,15 @@
-package com.poc.rewards.config;
+package com.poc.registry.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
-@SpringBootApplication
 @EnableEurekaServer
-public class RewardsConfigApplication {
+@SpringBootApplication
+public class RewardCalculatorNamingServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RewardsConfigApplication.class, args);
+		SpringApplication.run(RewardCalculatorNamingServerApplication.class, args);
 	}
 
 }
