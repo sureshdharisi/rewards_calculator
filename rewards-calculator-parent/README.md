@@ -27,3 +27,20 @@ without restarting the server.
 ## Component diagram
 ![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/record_calculator_design-Architecture_Diagram.png?raw=true)
 
+## How to use this application?
+We need to setup the data before sending request for rewards calculation.
+It has individual micro services for configuration, transactions and calculations. 
+
+Use below services to setup data:
+
+### reward-points-store
+
+This micro service will be used to create reqard points configuration data.
+
+### customer-transactions
+
+This micro service will handle the customer transactions. Create few customer transactions to calculate the total rewards.
+
+### rewards-calculator
+
+This micro service will handle the request to calculare the total rewards.
