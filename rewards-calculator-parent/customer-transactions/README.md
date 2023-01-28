@@ -46,9 +46,9 @@ password: admin
 ```
 We can access the h2 console using the URL: ```http://localhost:8686/customer/transaction/h2-console```
 
-![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/rewards-calculator-config-ms/h2console_login.PNG?raw=true)
+![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/customer-transactions/h2console_login.PNG?raw=true)
 
-![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/rewards-calculator-config-ms/h2console_home.PNG?raw=true)
+![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/customer-transactions/h2console_home.PNG?raw=true)
 
 Run the below steps to create initial database setup for the configuration service.
 
@@ -85,7 +85,7 @@ PRIMARY KEY (ID));
 
 
 ## Junit test cases details
-![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/rewards-calc-cust-trans-ms/code_coverage.PNG?raw=true)
+![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/customer-transactions/code_coverage.PNG?raw=true)
 
 
 ### How to run?
@@ -97,7 +97,7 @@ PRIMARY KEY (ID));
 2. Goto the project where pom.xml is located 
 
     ```
-    cd rewards_calculator/rewards-calculator-parent/rewards-calc-cust-trans-ms
+    cd rewards_calculator/rewards-calculator-parent/customer-transactions
     ```
 3. Run the maven command. The below command will run the junit test cases automatically
 

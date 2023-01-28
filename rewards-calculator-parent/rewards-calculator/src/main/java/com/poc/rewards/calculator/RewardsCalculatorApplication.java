@@ -9,7 +9,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 @EnableEurekaServer
-@EnableDiscoveryClient
 public class RewardsCalculatorApplication {
 
 	public static void main(String[] args) {
