@@ -14,7 +14,8 @@ without restarting the server.
 
 Each micro service is registered with eureka naming server.
 
-|Application|Port | Application Name | 
+| Application | Port | Application Name |
+|-----------|--------|--------|
 | Naming Server | 8761 | reward-calculator-naming-server |
 | Customer Transactions | 8686 | CUSTOMER-TRANSACTIONS|
 | Rewards configuration | 8585 | REWARD-POINTS-STORE |
