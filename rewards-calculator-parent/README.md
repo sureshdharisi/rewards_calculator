@@ -41,6 +41,11 @@ Each micro service is registered with eureka naming server.
 We need to setup the data before sending request for rewards calculation.
 It has individual micro services for configuration, transactions and calculations. 
 
+Before starting the testing, execute below steps to setup data.
+1. Start the naming server (reward-calculator-naming-server) to register individual micro services.
+2. Setup rewards configuration data using "reward-points-store"
+3. Setup few customer transactions using "customer-transactions" micro service.
+4. Execute the calculate rewards for the given user.
 Use below services to setup data:
 
 ### reward-points-store

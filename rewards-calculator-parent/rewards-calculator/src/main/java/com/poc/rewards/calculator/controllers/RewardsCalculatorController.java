@@ -14,7 +14,6 @@ import io.micrometer.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/calculate/")
 @Slf4j
 public class RewardsCalculatorController {
 
@@ -37,13 +36,13 @@ public class RewardsCalculatorController {
 	 * @param customer id
 	 * @return
 	 */
-	@GetMapping(path = "{customerId}")
-	public RewardsResponse calculateRewards(@PathVariable String customerId) {
+	@GetMapping(path = "/customers/{customerId}")
+	public RewardsResponse getRewardsForTheCustomer(@PathVariable String customerId) {
 		log.debug("Customer ID = {}", customerId);
 		if (StringUtils.isBlank(customerId)) {
 			throw new InvalidDataException("RC001", "Customer ID is required");
 		}
-		Integer points = service.calculatePoints(customerId);
+		Integer points = service.calculateRewardsPoints(customerId);
 
 		RewardsResponse response = new RewardsResponse(points);
 

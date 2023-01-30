@@ -47,7 +47,7 @@ ABC | 250 |
 ### Some sample requests
 * Input -1 
 ```
-http://localhost:8787/rewards/calculate/ABC
+http://localhost:8787/calculate/rewards/customers/ABC
 ```
 
 ```json
@@ -56,18 +56,6 @@ http://localhost:8787/rewards/calculate/ABC
 }
 ```
 
-### Some error responses
-* Input -1 
-```
-http://localhost:8787/rewards/calculate/ABC
-```
-
-```json
-{
-    "errorMessage": "Failed to convert value of type 'java.lang.String' to required type 'java.lang.Double'; For input string: \"abc\"",
-    "errorCode": "RC000"
-}
-```
 
 
 ### How to run?
@@ -93,5 +81,5 @@ mvn spring-boot:run
 ```
 ### Management URL
 ````
-http://localhost:8787/rewards/manage
+http://localhost:8787/calculate/rewards/manage
 ````
