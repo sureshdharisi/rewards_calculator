@@ -15,8 +15,8 @@ import com.poc.rewards.calculator.model.request.RewardsLimitsRequest;
  * @author suresh.dharisi
  *
  */
-@Service
-@FeignClient(value = "limitconfigclient", url = "localhost:8585/rewards/config/", configuration = ClientConfiguration.class)
+
+@FeignClient(name="REWARD-POINTS-STORE", path = "/rewards/config")
 public interface RewardsLimitConfigClient {
 
 

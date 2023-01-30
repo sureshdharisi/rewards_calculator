@@ -27,7 +27,7 @@ If you are using java.version 11, then make sure java_home also should point to 
 - STS 4.x for development
 
 ## Coverage Details
-![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/rewards-calculator-web/coverage.PNG?raw=true)
+![alt text](https://github.com/sureshdharisi/rewards_calculator/blob/develop/rewards-calculator-parent/rewards-calculator/coverage.PNG?raw=true)
 
 ## Testing
 
@@ -47,7 +47,7 @@ ABC | 250 |
 ### Some sample requests
 * Input -1 
 ```
-http://localhost:8787/rewards/calculate/ABC
+http://localhost:8787/calculate/rewards/customers/ABC
 ```
 
 ```json
@@ -56,18 +56,6 @@ http://localhost:8787/rewards/calculate/ABC
 }
 ```
 
-### Some error responses
-* Input -1 
-```
-http://localhost:8787/rewards/calculate/ABC
-```
-
-```json
-{
-    "errorMessage": "Failed to convert value of type 'java.lang.String' to required type 'java.lang.Double'; For input string: \"abc\"",
-    "errorCode": "RC000"
-}
-```
 
 
 ### How to run?
@@ -79,7 +67,7 @@ git clone https://github.com/sureshdharisi/rewards_calculator.git
 2. Goto the project where pom.xml is located 
 
 ```
-cd rewards_calculator/rewards-calculator-parent/rewards-calculator-web
+cd rewards_calculator/rewards-calculator-parent/rewards-calculator
 ```
 3. Run the maven command. The below command will run the junit test cases automatically
 
@@ -93,5 +81,5 @@ mvn spring-boot:run
 ```
 ### Management URL
 ````
-http://localhost:8787/rewards/manage
+http://localhost:8787/calculate/rewards/manage
 ````

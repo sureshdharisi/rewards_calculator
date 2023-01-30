@@ -8,17 +8,22 @@ import java.util.stream.Collectors;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.poc.rewards.config.common.constants.RewardsStoreConstants;
 import com.poc.rewards.config.common.exception.InvalidDataException;
 import com.poc.rewards.config.dataaccess.entity.RewardsLimitsEntity;
 import com.poc.rewards.config.dataaccess.repository.RewardsConfigRepository;
 import com.poc.rewards.config.model.request.RewardsLimitsRequest;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ConfigurationService {
 
 	@Autowired
@@ -77,7 +82,9 @@ public class ConfigurationService {
 	 * @return
 	 */
 
+	@Cacheable(RewardsStoreConstants.REWARDS_STORE_CACHE_NAME)
 	public List<RewardsLimitsRequest> getAllLimitConfigDetails() {
+		log.info("Fetching rewards configuration from database");
 		List<RewardsLimitsEntity> entityList = this.rewardsLimitsRepository.findAll();
 		return entityList.stream().map(entity -> this.mapper.map(entity, RewardsLimitsRequest.class))
 				.collect(Collectors.toList());

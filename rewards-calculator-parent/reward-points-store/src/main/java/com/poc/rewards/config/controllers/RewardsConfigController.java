@@ -13,17 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poc.rewards.config.business.service.ConfigurationService;
+import com.poc.rewards.config.business.service.RefreshCacheService;
 import com.poc.rewards.config.model.request.RewardsLimitsRequest;
 import com.poc.rewards.config.model.response.ConfigResponse;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/")
+@Slf4j
 public class RewardsConfigController {
 	
 	@Autowired
 	private ConfigurationService rewardsLimitConfigService;
+	
+	@Autowired
+	private RefreshCacheService refreshCacheService;
 	
 	/**
 	 * This will accept the request from user and create the configuration record.
@@ -33,6 +39,9 @@ public class RewardsConfigController {
 	@PostMapping
 	public RewardsLimitsRequest createConfig(@Valid @RequestBody RewardsLimitsRequest request) {
 		this.rewardsLimitConfigService.createConfig(request);
+		log.info("Reward configuration {} is created. Now triggering refresh cache ", request);
+		this.refreshCacheService.refreshRewardsConfigCache();
+		log.info("Triggered cache");
 		return request;
 	}
 	

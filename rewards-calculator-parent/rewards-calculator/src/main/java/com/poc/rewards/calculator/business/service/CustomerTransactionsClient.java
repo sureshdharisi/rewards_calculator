@@ -16,8 +16,7 @@ import com.poc.rewards.calculator.model.request.CustomerTransactionRequest;
  * @author suresh.dharisi
  *
  */
-@Service
-@FeignClient(value = "customertransactionsclient", url = "localhost:8686/customer/transaction/", configuration = ClientConfiguration.class)
+@FeignClient(name="CUSTOMER-TRANSACTIONS",path = "/customer/transaction")
 public interface CustomerTransactionsClient {
 
 

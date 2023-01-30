@@ -1,6 +1,5 @@
 package com.poc.rewards.calculator.business.service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -34,31 +33,48 @@ public class RewardsCalculatorService {
 	 * @return rewardsPoints
 	 */
 
-	public Integer calculatePoints(String customerId) {
+	public Integer calculateRewardsPoints(String customerId) {
 
+		// Get all the transactions for the customer using customer-transactions micro
+		// service
 		List<CustomerTransactionRequest> customerTransactionsList = this.customerTransactionsClient
 				.getAllCustomerTransactions(customerId);
+
+		// Get all available configurations
 		List<RewardsLimitsRequest> rewardsLimitsList = this.rewardsLimitConfigClient.getAllLimitConfigDetails();
-
-		AtomicInteger purchaseAmountValue = new AtomicInteger(0);
-
-		customerTransactionsList.stream().forEach(request -> {
-			purchaseAmountValue.addAndGet(request.getTransactionAmt());
-		});
-
-		Collections.sort(rewardsLimitsList,
-				(reward1, reward2) -> -1 * reward1.getLowerLimit().compareTo(reward2.getLowerLimit()));
 
 		AtomicInteger points = new AtomicInteger(0);
 
-		rewardsLimitsList.stream().filter(limit -> purchaseAmountValue.get() > limit.getLowerLimit()).forEach(limit -> {
-			Integer amount=(limit.getUpperLimit()==null||limit.getUpperLimit() > purchaseAmountValue.get())?purchaseAmountValue.get():limit.getUpperLimit();
-			points.addAndGet(limit.getPoints() * (amount - limit.getLowerLimit()));
-			
+		// Stream each transaction and calculate the reward points for each transaction.
+		// After getting the reward points for each transaction, add the result to
+		// "points" variable
+		// which is holding total reward points for the given customer.
+		customerTransactionsList.forEach(transaction -> {
+			points.getAndAdd(calculateRewardPoints(transaction, rewardsLimitsList));
 		});
 
+		// return the reward points
 		return points.get();
 
+	}
+
+	private Integer calculateRewardPoints(CustomerTransactionRequest transaction,
+			List<RewardsLimitsRequest> rewardsLimitsList) {
+		AtomicInteger points = new AtomicInteger(0);
+		// Reward points calculation logic
+		// 1. Filter the configuration objects based on transaction amount. If
+		// transaction amount is less than the lower limit,
+		// then we don't need to consider that configuration object.
+		rewardsLimitsList.stream().filter(limit -> transaction.getTransactionAmt() > limit.getLowerLimit())
+				.forEach(limit -> {
+					Integer amount = (limit.getUpperLimit() == null
+							|| limit.getUpperLimit() > transaction.getTransactionAmt())
+									? transaction.getTransactionAmt()
+									: limit.getUpperLimit();
+					points.addAndGet(limit.getPoints() * (amount - limit.getLowerLimit()));
+				});
+
+		return points.get();
 	}
 
 }
